@@ -21,12 +21,23 @@ def fast_text(text):
         if label == '__label__arb_Arab':
             return {'label': label, 'score': score}
 
-    return {'label': result[0][0],
-          'score': result[1][0]}
 
 
 def cld3_pred(text):
-    result = cld3.get_language("هلا")
+    result = cld3.get_language(text)
 
     return {'label': result[0],
           'score': result[1]}
+
+
+
+def PersoArabic(text):
+    model = fasttext.load_model('LID_model_merged.ftz')
+    preds, scores = model.predict(text,k=219)
+
+    if isinstance(scores, np.ndarray):
+        scores = scores.tolist()
+
+    for label, score in zip(preds, scores):
+        if label == '__label__ar':
+            return {'label': label, 'score': score}
