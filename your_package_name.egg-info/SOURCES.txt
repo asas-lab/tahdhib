@@ -1,0 +1,11 @@
+README.md
+setup.py
+dataset_cleaner/__init__.py
+dataset_cleaner/arabic_norm.py
+dataset_cleaner/language_identification.py
+tests/__init__.py
+tests/test_arabic_norm.py
+your_package_name.egg-info/PKG-INFO
+your_package_name.egg-info/SOURCES.txt
+your_package_name.egg-info/dependency_links.txt
+your_package_name.egg-info/top_level.txt
