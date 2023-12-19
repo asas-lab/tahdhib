@@ -18,8 +18,8 @@ def normalize_arabic(text):
     text = re.sub(r'\u0640', '', text)
     
     # 4. Remove non-Arabic characters
-    text = re.sub(r'[^\s' + arabic_range + ']', '', text)
-
+    # text = re.sub(r'[^\s' + arabic_range + ']', '', text)
+    
     # 5. Normalize whitespace
     text = ' '.join(text.split())
     
@@ -27,7 +27,7 @@ def normalize_arabic(text):
 
 # usage
 # Read the scraped data from the file
-with open('scraped_wikipedia_data.txt', 'r', encoding='utf-8') as file:
+with open('scraped_data.txt', 'r', encoding='utf-8') as file:
     scraped_data = file.readlines()
 
 # Apply normalization to each piece of text
