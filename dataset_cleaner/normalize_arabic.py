@@ -45,9 +45,13 @@ def normalize(
 
     # Remove non-Arabic characters - Replaced with special_characters
     #text = re.sub(r'[^\s' + arabic_range + ']', '', text)
+    # I think we should have another function deals with non-Arabic char where we have all or part(specified what parts...)
+    # then we have all the functions in one class
+    
     if special_characters != None:
         # Remove special characters like "!.*()?"#
         pattern = '[' + re.escape(special_characters) + ']'
-        re.sub(pattern, '', text)
+        # added 'text=' to save all the changes to text and return it at the end
+        text = re.sub(pattern, '', text)
 
     return text
