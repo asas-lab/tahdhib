@@ -3,48 +3,32 @@ from bs4 import BeautifulSoup
 import time
 
 
-def scrape_wikipedia(start_url, max_pages=20, link_number=30):
-    current_url = start_url
+def scrape_web(page_urls):
     all_text = []
 
-    for _ in range(max_pages):
-        response = requests.get(current_url)
+    for url in page_urls:
+        response = requests.get(url)
         soup = BeautifulSoup(response.content, 'html.parser')
 
         text = soup.get_text().replace('\n', ' ')
         all_text.append(text)
 
-        links = soup.find_all('a')
-        link_count = 0
-        for link in links:
-            href = link.get('href')
-            if href and 'https://ar.wikipedia.org' in href and not href.startswith('#'):
-                if '/wiki/Template:' not in href:  # Skip template pages
-                    link_count += 1
-                    if link_count == link_number:
-                        next_page = href
-                        break
-        else:
-            print("No more Arabic Wikipedia links found. Stopping.")
-            break
-
-        current_url = next_page
-        time.sleep(1)
+        time.sleep(1)  
 
     return all_text
 
-# Usage example
-start_url = 'https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D9%84%D8%BA%D8%A9_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9'
-scraped_data = scrape_wikipedia(start_url)
 
-# Print scraped data
-for page_text in scraped_data:
-    print(page_text)
-    print("--------------------------------------------------")
+page_urls = [
+    'https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D9%84%D8%BA%D8%A9_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9',
+    'https://www.arabtrvl.com/vb/t3065.html',
+    'https://www.aljazeera.net/midan/miscellaneous/education/2022/9/29/%D8%A3%D8%B3%D9%87%D9%84-%D9%84%D8%BA%D8%A7%D8%AA-%D8%A7%D9%84%D8%A8%D8%B1%D9%85%D8%AC%D8%A9-%D9%84%D9%84%D9%85%D8%A8%D8%AA%D8%AF%D8%A6%D9%8A%D9%86-%D9%83%D9%8A%D9%81-%D8%AA%D8%A8%D8%AF%D8%A3'
+]
 
+scraped_data = scrape_web(page_urls)
 
-# Save scraped data to a text file
-with open('scraped_wikipedia_data.txt', 'w', encoding='utf-8') as file:
+# Print and save scraped data
+with open('scraped_data.txt', 'w', encoding='utf-8') as file:
     for page_text in scraped_data:
+        print(page_text)
+        print("--------------------------------------------------")
         file.write(page_text + '\n--------------------------------------------------\n')
-
