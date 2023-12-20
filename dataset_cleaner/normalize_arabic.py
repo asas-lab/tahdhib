@@ -35,13 +35,10 @@ def normalize(
         # Replace Yaa variants with bare Yaa
         text = re.sub(r'[\u0649]', '\u064A', text)
 
+        # remove_tatweel part need more testing coz the result was deleting the words that has it! 
     if remove_tatweel == True:
         # 3. Remove Tatweel (Kashida)
         text = re.sub(r'\u0640', '', text)
-
-    if remove_extrawhitespace:
-        # Normalize whitespace
-        text = ' '.join(text.split())
 
     # Remove non-Arabic characters - Replaced with special_characters
     #text = re.sub(r'[^\s' + arabic_range + ']', '', text)
@@ -53,5 +50,10 @@ def normalize(
         pattern = '[' + re.escape(special_characters) + ']'
         # added 'text=' to save all the changes to text and return it at the end
         text = re.sub(pattern, '', text)
+        
+        # The part of normalizing white spaces must be the last step before the final output
+    if remove_extrawhitespace:
+        # Normalize whitespace
+        text = ' '.join(text.split())
 
     return text
