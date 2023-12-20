@@ -34,6 +34,9 @@ with open('scraped_data.txt', 'r', encoding='utf-8') as file:
 normalized_data = [normalize_arabic(text) for text in scraped_data]
 
 # print 
-for page_text in normalized_data:
-    print(page_text)
+with open('scraped_data_result.txt', 'w', encoding='utf-8') as file:
+    for page_text in normalized_data:
+        print(page_text)
+        print("--------------------------------------------------")
+        file.write(page_text + '\n--------------------------------------------------\n')
 
