@@ -16,8 +16,12 @@ def normalize_arabic(text):
     # not deleting URLs was helpful for the model!
     # This only delete that start with 'http, https'
     text = re.sub(r'http[s]?://\S+', '', text)
+    
+    # 3. Remove repetition in letters like "هههههه، مرررحبا"
+    # more than 2 of the same character to two
+    text = re.sub(r'(.)\1+', r'\1\1', text)
 
-    # 3. Standardize Arabic characters
+    # 4. Standardize Arabic characters
         
     # Reason: there are variation of the same letetr 
     # though they might held importance in dectation, their importance in meaning 
@@ -31,14 +35,14 @@ def normalize_arabic(text):
     # Replace Taa Marbuta to Ha (ة،ه)
     text = re.sub(r'ة\b', 'ه', text)
 
-    # 4. Remove Tatweel (Kashida)
+    # 5. Remove Tatweel (Kashida)
     text = re.sub(r'\u0640', '', text)
 
-    # 5. Remove empty lines 
+    # 6. Remove empty lines 
     text = re.sub(r'\n+', '\n', text)  # Replace multiple newlines with a single one
     text = re.sub(r'^\s*$', '', text, flags=re.MULTILINE)  # Remove empty lines
     
-    # 6.Normalize whitespace
+    # 7.Normalize whitespace
     text = ' '.join(text.split())
 
     return text
