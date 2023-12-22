@@ -37,6 +37,10 @@ def normalize_arabic(text):
 
     # 5. Remove Tatweel (Kashida)
     text = re.sub(r'\u0640', '', text)
+    
+    # 6. Standrize numbers from western to Arabic -it can be the opposite-
+    western_to_arabic_numerals = str.maketrans('0123456789', '٠١٢٣٤٥٦٧٨٩')
+    text = text.translate(western_to_arabic_numerals)
 
     # 6. Remove empty lines 
     text = re.sub(r'\n+', '\n', text)  # Replace multiple newlines with a single one
