@@ -7,8 +7,17 @@ def normalize_arabic(text):
     # 1. Normalize Arabic diacritics (Tashkeel)
     tashkeel_pattern = re.compile(r'[\u0617-\u061A\u064B-\u0652\u06D6-\u06DC\u06DF-\u06E8\u06EA-\u06ED]')
     text = re.sub(tashkeel_pattern, '', text)
+    
+    # 2.Remove non useful text
+    # HTML tags
+    text = re.sub(r'<[^>]+>', '', text)
+    # URLs
+    # from a personal experiance in detecting posative/negative tweets
+    # not deleting URLs was helpful for the model!
+    # This only delete that start with 'http, https'
+    text = re.sub(r'http[s]?://\S+', '', text)
 
-    # 2. Standardize Arabic characters
+    # 3. Standardize Arabic characters
         
     # Reason: there are variation of the same letetr 
     # though they might held importance in dectation, their importance in meaning 
@@ -22,14 +31,14 @@ def normalize_arabic(text):
     # Replace Taa Marbuta to Ha (ة،ه)
     text = re.sub(r'ة\b', 'ه', text)
 
-    # 3. Remove Tatweel (Kashida)
+    # 4. Remove Tatweel (Kashida)
     text = re.sub(r'\u0640', '', text)
 
-    # 4. Remove empty lines 
+    # 5. Remove empty lines 
     text = re.sub(r'\n+', '\n', text)  # Replace multiple newlines with a single one
     text = re.sub(r'^\s*$', '', text, flags=re.MULTILINE)  # Remove empty lines
     
-    # 5.Normalize whitespace
+    # 6.Normalize whitespace
     text = ' '.join(text.split())
 
     return text
