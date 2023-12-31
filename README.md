@@ -1,13 +1,13 @@
 # Tahdhib
 ## files
 
-**wiki_arabic_scripts:** a Python file for scrabbing web data.
+**wiki_arabic_scripts:** a Python file for scraping web data.
 
-**scraped_data:** a text file of raw scrabbed data.
+**scraped_data:** a text file of raw scraped data.
 
 **scraped_data_result:** a text file result of running the pipeline on the raw data.
 
-**normalize_arabic:** a python file of data cleaning pipeline.
+**normalize_arabic:** a Python file of data cleaning pipeline.
 
 ## Documentation of the pipeline
 - Replace Alif variants (ٱ،إ،أ،آ) with bare Alif (ا)
