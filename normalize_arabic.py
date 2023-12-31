@@ -22,18 +22,21 @@ def normalize_arabic(text):
     text = re.sub(r'(.)\1+', r'\1\1', text)
 
     # 4. Standardize Arabic characters
-        
-    # Reason: there are variation of the same letetr 
-    # though they might held importance in dectation, their importance in meaning 
-    # -such as changing the meaning of the word when we return them to their original form-
-    # has less to no significance importance
-        
+    
     # Replace Alif variants with bare Alif (ٱ،إ،أ،آ)
     text = re.sub(r'[\u0622\u0623\u0625\u0671\u0672\u0673\u0675]', '\u0627', text)
     # Replace Yaa variants with bare Yaa (ي،ى)
     text = re.sub(r'[\u0649]', '\u064A', text)
     # Replace Taa Marbuta to Ha (ة،ه)
     text = re.sub(r'ة\b', 'ه', text)
+    # Replace (ؤ) with (و)
+    text = re.sub(r'ؤ', 'و', text)
+    # Replace (ئ) with (ي)
+    text = re.sub(r'ئ', 'ي', text)
+    # Delete (ء)
+    text = re.sub(r'ء', '', text)
+    # Delete (ال) from the beginning of the words
+    text = re.sub(r'\bال', '', text)
 
     # 5. Remove Tatweel (Kashida)
     text = re.sub(r'\u0640', '', text)
@@ -42,11 +45,11 @@ def normalize_arabic(text):
     western_to_arabic_numerals = str.maketrans('0123456789', '٠١٢٣٤٥٦٧٨٩')
     text = text.translate(western_to_arabic_numerals)
 
-    # 6. Remove empty lines 
+    # 7. Remove empty lines 
     text = re.sub(r'\n+', '\n', text)  # Replace multiple newlines with a single one
     text = re.sub(r'^\s*$', '', text, flags=re.MULTILINE)  # Remove empty lines
     
-    # 7.Normalize whitespace
+    # 8. Normalize whitespace
     text = ' '.join(text.split())
 
     return text
