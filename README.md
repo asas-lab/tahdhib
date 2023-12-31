@@ -10,27 +10,29 @@
 **normalize_arabic:** a python file of data cleaning pipeline.
 
 ## Documentation of the pipeline
-Replace Alif variants (ٱ،إ،أ،آ) with bare Alif (ا)
-Replace Yaa variants (ى) with bare Yaa (ي)
-Replace Ha (ه) with Taa Marbuta (ة)
-Replace (ؤ) with (و)
-Replace (ئ) with (ي)
-Delete (ء)
-Delete (ال)
-Delete Tatweel
-Delete Harakat
-Delete HTML tags
-Delete URLs
-Delete letters repetition (هههههه، مرررحبا)
-Standrize numbers from western to Arabic
-Remove empty lines
-Remove extra whitespace between words
+- Replace Alif variants (ٱ،إ،أ،آ) with bare Alif (ا)
+- Replace Yaa variants (ى) with bare Yaa (ي)
+- Replace Ha (ه) with Taa Marbuta (ة)
+- Replace (ؤ) with (و)
+- Replace (ئ) with (ي)
+- Delete (ء)
+- Delete (ال)
+- Delete Tatweel
+- Delete Harakat
+- Delete HTML tags
+- Delete URLs
+- Delete letters repetition (هههههه، مرررحبا)
+- Standardize numbers from Western to Arabic
+- Remove empty lines
+- Remove extra whitespace between words
+
 
 ### Reasons
-1 - Reduce the complexity of the text because the model has fewer variations of the same word to learn.
-2 - To help the model to generalize better, as it may not need to understand the nuances of each character variant to make accurate predictions.
-3 - Mostly it carries grammatical or phonetic significance but not semantic. 
-4 - Fix spelling mistakes since most of dectation errors are in these areas, especially social media data.  
+1. Reduce the complexity of the text because the model has fewer variations of the same word to learn.
+2. To help the model to generalize better, as it may not need to understand the nuances of each character variant to make accurate predictions.
+3. Mostly it carries grammatical or phonetic significance but not semantic.
+4. Fix spelling mistakes since most of dictation errors are in these areas, especially social media data.
+ 
 
 **Problem:** an issue will rise using this deep normalization, a model trained on it might not correctly generate text with the appropriate use of variations.
 
