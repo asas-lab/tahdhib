@@ -1,9 +1,9 @@
 # Tahdhib
 ## files
 
-**wiki_arabic_scripts:** a python file for scrabing web data.
+**wiki_arabic_scripts:** a Python file for scrabbing web data.
 
-**scraped_data:** a text file of raw scrippd data.
+**scraped_data:** a text file of raw scrabbed data.
 
 **scraped_data_result:** a text file result of running the pipeline on the raw data.
 
@@ -21,7 +21,7 @@
 - Delete Harakat
 - Delete HTML tags
 - Delete URLs
-- Delete letters repetition (هههههه، مرررحبا)
+- Delete letter repetition (هههههه، مرررحبا)
 - Standardize numbers from Western to Arabic
 - Remove empty lines
 - Remove extra whitespace between words
@@ -34,7 +34,7 @@
 4. Fix spelling mistakes since most of dictation errors are in these areas, especially social media data.
  
 
-**Problem:** an issue will rise using this deep normalization, a model trained on it might not correctly generate text with the appropriate use of variations.
+**Problem:** an issue will arise using this deep normalization, a model trained on it might not correctly generate text with the appropriate use of variations.
 
 **Solution:** do multiple model training phases, initially training a model on highly normalized data and then introducing less normalized or unnormalized data in a later phase. 
 
